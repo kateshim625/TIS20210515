@@ -86,18 +86,18 @@
         <p>Here's a list of downloadable files:</p>
         <ul class="icon-links">
             <!-- //클릭하면 when do  -->
-            <li><a v-bind:class="state" v-on:click="presentation" href="presentation.ppt">Presentation slides</a></li>
-            <li><a v-bind:class="state" v-on:click="viedo" href="video.mp4">Video of presentation</a></li>
-            <li><a v-bind:class="state" v-on:click="pdf" href="notes.pdf">Notes for presentation</a></li>
-            <li><a v-bind:class="state" v-on:click="image" href="icons.gif">GIF Icon sprite</a></li>
-            <li><a v-bind:class="state" v-on:click="image" href="icons.png">PNG Icon sprite</a></li>
-            <li><a v-bind:class="state" v-on:click="image" href="icons.jpg">PNG Icon sprite</a></li>
-            <li><a v-bind:class="state" v-on:click="presentation" href="fuyyu.ppt">Presentation slides</a></li>
-            <li><a v-bind:class="state" v-on:click="viedo" href="fyyuy.mp4">Video of presentation</a></li>
-            <li><a v-bind:class="state" v-on:click="pdf" href="uydyuflk.pdf">Notes for presentation</a></li>
-            <li><a v-bind:class="state" v-on:click="image" href="OIP.gif">GIF Icon sprite</a></li>
-            <li><a v-bind:class="state" v-on:click="presentation" href="ID7890IO.png">PNG Icon sprite</a></li>
-            <li><a v-bind:class="state" v-on:click="image" href="PFDY.jpg">PNG Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="presentation.ppt">Presentation slides</a></li>
+            <li><a v-on:click="aclick" href="video.mp4">Video of presentation</a></li>
+            <li><a v-on:click="aclick" href="notes.pdf">Notes for presentation</a></li>
+            <li><a v-on:click="aclick" href="icons.gif">GIF Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="icons.png">PNG Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="icons.jpg">PNG Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="fuyyu.ppt">Presentation slides</a></li>
+            <li><a v-on:click="aclick" href="fyyuy.mp4">Video of presentation</a></li>
+            <li><a v-on:click="aclick" href="uydyuflk.pdf">Notes for presentation</a></li>
+            <li><a v-on:click="aclick" href="OIP.gif">GIF Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="ID7890IO.png">PNG Icon sprite</a></li>
+            <li><a v-on:click="aclick" href="PFDY.jpg">PNG Icon sprite</a></li>
         </ul>
     </div>
     <hr>
@@ -116,51 +116,39 @@
 new Vue({
     /* edtmc^2w */
     el: "#app",
-    data: {
-        state: null,
-        presentation: null,
-        viedo: null,
-        pdf: null,
-        image: null,
-    },
-    //template: ``,
     methods: {
+        aclick: function (event) {
+            console.log(event.taget);
+            var href = event.target.href;
 
-        presentation: function (event) {
             var ext = href.substr(-3); // href.substr(href.lenght-3, 3);
-            if(ext == pdf) {
-                console.log(event.target.class);
-                this.$data.state = "presentation"
+            var cname = "";
+            if(ext === "ppt") {
+                cname = "presentation";
+            } else if(ext === "mp4") {
+                cname = "video";
+            } else if(ext === "pdf") {
+                cname = "pdf";
+            } else if(ext === "gif") {
+                cname = "image";
+            } else if(ext === "png") {
+                cname = "image";
+            } else if(ext === "jpg") {
+                cname = "image";
             }
-            event.preventDefault()
+                //파일의 확장자가 ppt 이면 a.presentation 적용
+                //파일의 확장자가 mp4 이면 a.video 적용
+                //파일의 확장자가 pdf 이면 a.pdf 적용
+                //파일의 확장자가 gif 이면 a.image 적용
+                //파일의 확장자가 png 이면 a.image 적용
+                //파일의 확장자가 jpg 이면 a.image 적용
+
+                event.target.className = cname;
+
+                event.preventDefault()
                 event.stopPropagation()
-        },
-        presentation: function (event) {
-        },
-        viedo: function (event) {
 
         },
-        image: function (event) {
-
-        },
-    },
-    components: {
-        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
-
-    },
-    computed: {
-        /* 자동처리 + 동기식. 메서드로 작성. return 필수. */
-
-    },
-    watch: {
-        /* 자동처리 + 비동기식. data 에 등록된 프로퍼티 모니터링. 메서드로 작성. 매개변수 입력 필수  */
-
-    },
-    mounted: function() {
-        console.log("mounted");
-    },
-    updated: function() {
-        console.log("updated");
     },
 });
 

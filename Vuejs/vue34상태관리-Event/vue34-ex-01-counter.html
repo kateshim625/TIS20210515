@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
     <title>Vuex Sample</title>
-
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
-
+    <link rel="stylesheet"
+      href="../css/reset.css">
     <style>
-        .component-parent {
-            width: 50%;
-            background-color: lightblue;
-            padding: 5%;
-        }
+      .component-parent {
+        width: 50%;
+        background-color: lightblue;
+        padding: 5%;
+      }
 
-        .component-child {
-            width: 80%;
-            background-color: lightgray;
-            padding: 5% 5% 10% 0;
-        }
+      .component-child {
+        width: 80%;
+        background-color: lightgray;
+        padding: 5% 5% 10% 0;
+      }
+
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <h2>Parent 컴포넌트와 Child 컴포넌트가 표시된 화면</h2>
-    <img src="../images/vue-sample-counter.png" alt="" srcset="" style="padding-left: 30px;">
-
+    <img src="../images/vue-sample-counter.png"
+      alt=""
+      srcset=""
+      style="padding-left: 30px;">
     <xmp>
         props 와 이벤트를 사용하예 아래 예제를 작성한다.
 
@@ -77,78 +78,78 @@
             }
     </xmp>
     <hr>
-
-    <div id="app" class="component-parent">
-        Parent counter : {{ counter }} <br>
-        <button name="parent" v-on:click="addCounter(this.event, +1)">+</button>
-        <button name="parent" v-on:click="subCounter(this.event, -1)">-</button>
-        <p></p>
-
-        <!-- Child 컴포넌트를 등록하고 counter 데이터 속성을 props로 전달한다. -->
-        <component-child
-            v-bind:num      ="counter"
-            v-on:add-counter="addCounter"
-            v-on:sub-counter="subCounter">
-        </component-child>
+    <div id="app"
+      class="component-parent"> Parent counter : {{ counter }} <br>
+      <button name="parent"
+        v-on:click="addCounter(this.event, +1)">+</button>
+      <button name="parent"
+        v-on:click="subCounter(this.event, -1)">-</button>
+      <p></p>
+      <!-- Child 컴포넌트를 등록하고 counter 데이터 속성을 props로 전달한다. -->
+      <component-child v-bind:num="counter"
+        v-on:add-counter="addCounter"
+        v-on:sub-counter="subCounter">
+      </component-child>
     </div>
-</body>
-
+  </body>
 </html>
-
 <!-- vue 플러그인 임포트   -->
-
 <!-- vue 플러그인 임포트   -->
 <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
 <script>
   var componentChild = {
-      /* pdtmc^2w */
-      props: ['num'] ,
-      data: function() {
-          return {
-
-          }
-      },
-      template: `
+    /* pdtmc^2w */
+    props: ['num'],
+    //num이 어디서오는건지는 컴포넌트 차일드의 바인드에서 알수있는데 바이드 부모의 카운터의값을 자식이받을때는
+    //차일드컴포넌트 넘에 카운터를 넣을것이다라는것인데 부모로부터받으니깐 프롭스에 넣어준다
+    template: `
       <div class="component-child">
-              Child counter : {{ num }} <br>
-              <button name="child" v-on:click="addCounter">+</button>
-              <button name="child" v-on:click="subCounter">-</button>
-          </div>
-
+          Child counter : {{ num }} <br>
+          <button name="child" v-on:click="addCounter">+</button>
+          <button name="child" v-on:click="subCounter">-</button>
+      </div>
       `,
-      methods: {
-        addCounter: function (event) {
-          console.log(event);
-          this.$emit("add-counter", this.$data.num += 10)
-        },
-        subCounter: function (event) {
-          console.log(event);
-          this.$emit("sub-counter")
-        },
-      },
-  };
-
-new Vue({
-    /* edtmc^2w */
-    el: "#app",
-    data: {
-      counter: null,
-    },
-    //template: ``,
     methods: {
       addCounter: function (event) {
+        //부모메서드 호출
         console.log(event);
-        this.$data.counter = this.$data.counter += 1;
+        //var num = 10;
+//          debugger;
+        this.$emit("add-counter", event, +10)
       },
       subCounter: function (event) {
         console.log(event);
-        this.$data.counter = this.$data.counter -= 1;
+        //부모가서 인자 머 받아오는지 확인하고 적어주면됨
+        this.$emit("sub-counter", event, -10)
+      },
+    },
+  };
+
+  new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+      counter: 0,
+    },
+    //template: ``,
+    methods: {
+      addCounter: function (event, param) {
+        console.log(event);
+        //debugger;
+        //this.$data.counter += param; //
+        this.$data.counter =  this.$data.counter + param
+      },
+      subCounter: function (event, param) {
+        console.log(event);
+        //this.$data.counter -= param;
+        this.$data.counter =  this.$data.counter + param
+
       },
     },
     components: {
-        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
-        "component-child": componentChild,
+      /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+      "component-child": componentChild,
     },
-});
+  });
 
 </script>
