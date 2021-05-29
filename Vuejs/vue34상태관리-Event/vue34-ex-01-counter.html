@@ -96,3 +96,59 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+  var componentChild = {
+      /* pdtmc^2w */
+      props: ['num'] ,
+      data: function() {
+          return {
+
+          }
+      },
+      template: `
+      <div class="component-child">
+              Child counter : {{ num }} <br>
+              <button name="child" v-on:click="addCounter">+</button>
+              <button name="child" v-on:click="subCounter">-</button>
+          </div>
+
+      `,
+      methods: {
+        addCounter: function (event) {
+          console.log(event);
+          this.$emit("add-counter", this.$data.num += 10)
+        },
+        subCounter: function (event) {
+          console.log(event);
+          this.$emit("sub-counter")
+        },
+      },
+  };
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+      counter: null,
+    },
+    //template: ``,
+    methods: {
+      addCounter: function (event) {
+        console.log(event);
+        this.$data.counter = this.$data.counter += 1;
+      },
+      subCounter: function (event) {
+        console.log(event);
+        this.$data.counter = this.$data.counter -= 1;
+      },
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        "component-child": componentChild,
+    },
+});
+
+</script>
