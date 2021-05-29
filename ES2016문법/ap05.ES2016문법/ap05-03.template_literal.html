@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <xmp>
+    ES6 코드를 브라우저에서 실행하려면 babel 이 필요하다.
+
+    < script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">/* ES5로 변환 */</script>
+    < script type="text/babel">
+        // ES6 코딩
+    </script>
+    </xmp>
+
+</body>
+</html>
+
+<script>
+    //ES2016 문법
+    var string1 = "hi";
+    var string2 = "nice to meet you";
+    var greeting = `${string1} ${string2}`;
+    console.log(greeting);
+
+    var product = { name: 'book', price: '4200won'};
+    var message = `
+       That product ${product.name} of price is ${product.price}.
+    `;
+    console.log(message);
+</script>
+
+

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>vue28-ex-01.표준이벤트등록</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+    <style>
+        ul {
+            float: left;
+            margin: 10px 30px;
+        }
+
+        #id2 {
+            width: 100px;
+            height: 100px;
+            margin-left: 50px;
+        }
+
+        span {
+            width: 70px;
+            height: 50px;
+            float: left;
+            background-color: red;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        hr {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+
+      "vue25-13-ex1.이벤트바인딩.html" 를 참고하여 이벤트를 설정하시오.
+
+      a 를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
+        1. a 태그의 href 값을 가져온다.
+        2. id="img2" 의 src 에 1번에서 얻은 href의 값을 넣는다.
+        3. a 태그의 redirect 기능을 취소하시오.
+
+      id="but1" 인 엘리먼트에 mouseover, mouseout 효과 넣기
+      id="img-swap"인 엘리멘트에 mouseover, mouseout 효과 넣기
+      span 엘리먼트에 mouseover, mouseout, mousedown, mouseup 효과 넣기
+      id="sel" 엘리먼트에 change 효과 넣기
+      id="ID" 엘리먼트에 focus, blur 효과 넣기
+
+      참고 : https://kr.vuejs.org/v2/guide/forms.html#header
+    </pre>
+    <hr />
+
+    <div id="app">
+        <xmp>
+            글자를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
+            a 태그에 click 이벤트 핸들러를 작성하시오. ==> imageclick
+        </xmp>
+        <ul>
+            <li>
+                <a class="image3" href="../images/image3.jpg" v-on:click="imageclick">
+                    강아지 사진
+                </a>
+            </li>
+            <li>
+                <a class="image3" href="../images/image4.jpg" v-on:click="imageclick">
+                    고양이 사진
+                </a>
+            </li>
+        </ul>
+        <img id="img2" v-bind:src="img_image3" />
+        <hr />
+
+        <xmp>
+            이미지 위에 마우스를 올리거나 내리면 src 에 있는 값을 "img" 태그에 나오게 하시오
+            이미지에 mouseover 와 mouseout 이벤트를 핸들러를 작성하시오.
+            mouseover 이벤트를 핸들러 ==> imageover
+            mouseout 이벤트를 핸들러 ==> imageout
+
+            이미지 위에 마우스를 내리면(mouseout ) ==> ../images/but1.gif , ../images/img_swap_off.png
+            이미지 위에 마우스를 올리면(mouseover) ==> ../images/but2.gif , ../images/img_swap_on.png
+        </xmp>
+        <!-- //이미지는 데이터 처리 이벤트는 브이온 -->
+        <img v-bind:src="img_but1" id="but1" v-on:mouseover="imageover"  v-on:mouseout="imageout" />
+        <img v-bind:src="img_swap" id="img-swap" v-on:mouseover="imageover"  v-on:mouseout="imageout" />
+        <hr />
+
+        <xmp>
+            span에 mouseover 이벤트 핸들러를 작성하시오. ==> spanmouseover. background-color를 yellow로 설정
+            span에 mousedown 이벤트 핸들러를 작성하시오. ==> spanmousedown. background-color를 blue로 설정
+            span에 mouseup 이벤트 핸들러를 작성하시오.   ==> spanmouseup.   background-color를 pink로 설정
+            span에 mouseout 이벤트 핸들러를 작성하시오.  ==> spanmouseout.  background-color를 red로 설정
+        </xmp>
+        <span v-on:mouseover= "spanmouseover"
+                 v-on:mousedown= "spanmousedown"
+                 v-on:mouseup  = "spanmouseup"
+                 v-on:mouseout = "spanmouseout">
+        </span>
+        <span v-on:mouseover= "spanmouseover"
+                 v-on:mousedown= "spanmousedown"
+                 v-on:mouseup  = "spanmouseup"
+                 v-on:mouseout = "spanmouseout">
+        </span>
+        <span v-on:mouseover= "spanmouseover"
+                 v-on:mousedown= "spanmousedown"
+                 v-on:mouseup  = "spanmouseup"
+                 v-on:mouseout = "spanmouseout">
+        </span>
+        <hr />
+
+        <xmp>
+            select 에 change 이벤트 핸들러를 작성하시오.
+            change 이벤트 핸들러: selectchange
+
+            도전: 기능추가
+            "vue23-01.v-for와배열.html" 를 참조하여 option 부분을 v-for 를 사용하도록 수정하시오.
+
+        </xmp>
+        <select id="sel" v-on:change="selectchange">
+            <option value="../images/strawberry.gif">딸기</option>
+            <option value="../images/banana.gif">바나나</option>
+            <option value="../images/apple.gif" selected>사과</option>
+        </select>
+
+        <img id="img" v-bind:src="img_select" />
+        <hr />
+
+        <xmp>
+            input 태그에 focus, blur 효과 넣기
+            >>> input 태그에 테두리를 칠하는 경우에는 outline을 사용.
+            focus 이벤트 핸들러 ==> inputfocus. outline: 2px dotted red 설정
+            blur 이벤트 핸들러 ==> inputblur. outline: none 설정
+        </xmp>
+        <input type="text" id="ID" blur="inputblur" focus="inputfocus" />
+        <hr />
+
+    </div>
+
+</body>
+
+</html>
+
+<!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        //데이터도 넣는다
+        img_image3: null,
+        //디폴트값을 넣어주면 좋음 실행되자마자 이미지가 나올것임
+        img_but1: "../images/but1.gif",
+        img_swap: '../images/img_swap_off.png',
+        img_select: "../images/apple.gif",
+    },
+    //template: ``,
+    methods: {
+        imageclick: function (event) {
+            //클릭하면 해당되는 태그정보를 가져오고싶을떄 = 클린된태그 이벤트타겟
+            //href 속성을 가져오려면  <img id="img2" v-bind:src="img_image3" /> 이거 전체임
+            console.log(event.target.href);
+            //위의 태그를 img_image3에 넣는다
+            //문제는 뭐냐면 리다이렉트가 생성됨 이벤트라서 이벤트취소를 아래에 적용하여 막는다
+            //this.$data.img_image3 = event.target.href; // set으로 변경
+            this.$set(this.$data, "img_image3", event.target.href);
+            //a redirect기능취소 / 아래 두가지가있음 그냥 두가 다 쓰기
+            event.stopPropagation(); //버블링을 막는것이 목적
+            event.preventDefault(); //리다이렉트를 막을 수있음
+        },
+        //같은 하나의 이벤트로 두개이상 처리해야해서 구분을 잘해줄필요가있음 그것만하면됨
+        //무엇으로해야될까?
+        imageover: function (event) {
+             //아이디값을 구하려면 이벤트 타멧으로 해서 가져옴 속성들은 만들어서 쓰기때문에 용도에 맞게 쓰거나
+            //속성을 가짜로 만들기
+            console.log(event.target.src);
+            console.log(event.target.id);
+            if( event.target.id === "but1") {
+            //마우스오버
+                this.$data.img_but1 = '../images/but2.gif';
+            }
+            else {
+                this.$data.img_swap = '../images/img_swap_on.png';
+            }
+            //이미지 위에 마우스를 내리면(mouseout ) ==> ../images/but1.gif , ../images/img_swap_off.png
+            //이미지 위에 마우스를 올리면(mouseover) ==> ../images/but2.gif , ../images/img_swap_on.png
+        },
+        imageout: function (event) {
+            //아이디값을 구하려면 이벤트 타멧으로 해서 가져옴 속성들은 만들어서 쓰기때문에 용도에 맞게 쓰거나
+            //속성을 가짜로 만들기
+            console.log(event.target.src);
+            console.log(event.target.id);
+            //
+            if( event.target.id === "but1") {
+                this.$data.img_but1 = '../images/but1.gif';
+
+            }
+            else {
+                this.$data.img_swap = '../images/img_swap_off.png';
+            }
+        },
+
+        spanmouseover: function (event) {
+            console.log(event.target);
+            //스타일을 넣어야됨
+            //<span style="background-color: yellow"> 하라는것 = 이것들이 다 객체로 바뀜 그래서
+            //event.target.style="background-color:yellow;"
+            //아래와 같음 백그라운드 컬러가문제인데 대쉬를 못쓰는데 그건 대문자로 바꿔준다 그걸 대쉬표기법이라고한다
+            //카멜표기법으로 바꿈
+            event.target.style.backgroundColor="yellow";
+            //또다른방법은 스타일시트를 제이에스로만드는것
+            /*
+            event.target.style = {
+                //"background-color: yellow", //이거나 밑에꺼나
+                backgroundColor: "yellow"
+                //자바스크립트로 바꿔주는 싸이트도 있음 그래서 타이핑 다안해도됨 너무많으면 스타일시트 변화싸이트로사용하면됨
+            }
+            */
+        },
+        spanmousedown: function (event) {
+            console.log(event.target);
+            event.target.style.backgroundColor="blue";
+
+        },
+        spanmouseup: function (event) {
+            console.log(event.target);
+            event.target.style.backgroundColor="pink";
+
+        },
+        spanmouseout: function (event) {
+            console.log(event.target);
+            event.target.style.backgroundColor="red";
+
+        },
+
+//     span에 mouseover 이벤트 핸들러를 작성하시오. ==> spanmouseover. background-color를 yellow로 설정
+//     span에 mousedown 이벤트 핸들러를 작성하시오. ==> spanmousedown. background-color를 blue로 설정
+//     span에 mouseup 이벤트 핸들러를 작성하시오.   ==> spanmouseup.   background-color를 pink로 설정
+//     span에 mouseout 이벤트 핸들러를 작성하시오.  ==> spanmouseout.  background-color를 red로 설정
+// https://www.joinc.co.kr/w/man/12/vuejs/events
+
+        selectchange: function (event) {
+            console.log(event.target);
+            //선택된 값을 가져오고 싶을때 답은 항상 이벤트.타겟 그런다음 값이니 벨류! event.target.value
+            //this.$data.img_select = event.target.value;
+            //this.$set  변경
+            this.$set(this.$data, "img_select", event.target.value);
+        },
+    },
+});
+
+</script>
+

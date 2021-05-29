@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css">
+
+    <style>
+        span {
+            font-size: 3em;
+        }
+    </style>
+</head>
+
+<body>
+    <xmp>
+
+        data 속성의 값을 변경하려면 재할당으로 처리해야 한다.
+
+        data 속성 주의 사항
+            인스턴스나 컴포넌트의 data 속성의 값을 직접 바꾸면 화면에 rendering 이 되지 않는 문제 발생
+            즉, this.$data.arr[0]=100; 과 같이 바꾸면 값은 바뀌지만 화면에 rendering 되지 않는 문제 발생.
+
+        어떻게 data 속성의 값을 바꾸어야 하나?
+            data 속성의 값을 변경하려면 반드시 재할당으로 처리해야 한다.
+
+        자바스크립트 타입
+            # value 타입에는 string, number, boolen, ...
+            # reference 타입에는 Object, Array, Function, ...
+
+        new Vue({
+            el: "#",
+            data: {
+                msg1:  "aaa", /* string */
+                msg2: 123, /* number */
+                msg3: true, /* boolen */
+                msg4: [1,2,3] /* array */
+                msg5: { a:1, b: "2"}, /*I object */
+                msg6: [
+                    { a:11, b: "12"} ,
+                    { a:21, b: "22"} ,
+                    { a:31, b: "32"} ,
+                ]
+            }
+        })
+
+
+        value 타입인 경우의 해결방법
+            data: {
+                msg1:  "aaa", /* string */
+                msg2: 123, /* number */
+                msg3: true, /* boolen */
+            }
+            1. this.$set(this.$data, "msg1", "ccc");
+            2. Vue.set(this.$data,"msg1", "bbb");
+            3. this.$data["msg1"] = "ddd";
+            4. this.$data.msg1 = "ddd";
+
+        reference 타입인 경우의 해결방법
+            data: {
+                msg4: [1,2,3] /* array */
+                msg5: { a:1, b: "2"}, /*I object */
+                msg6: [
+                    { a:11, b: "12"} ,
+                    { a:21, b: "22"} ,
+                    { a:31, b: "32"} ,
+                ]
+            }
+
+            1. this.$set(object, key, value) 방식.
+                this.$set() 은 Vue 인스턴스 의 인스턴스 메서드
+                this.$set(this.$data.msg4, 0, 300);
+
+            2. Vue.set(object, key, value) 방식
+                Vue.set() 은 Vue prototype 의 static 메서드
+                Vue.set(this.$data.msg4, 0, 100);
+
+            3. splice()함수를 사용하여 변경한다.
+                this.$data.msg4.splice(0,2,500);
+
+            4. spread 연산자 방식 ==> 배열을 새로 만든 뒤 할당. ES6 에서만 가능.
+                var arr_copy=[...this.$data.msg4, 70];
+
+        실행 순서와 결과 예시
+            (0) [1, 2, 3, 4, 5]
+            (1) [100, 2, 3, 4, 5]       <== 방법1을 적용
+            (2) [100, 300, 3, 4, 5]     <== 방법2을 적용
+            (3) [3, 4, 5]               <== 방법3을 적용
+            (4) [500, 3, 4, 5, 70]      <== 방법4을 적용
+
+    </xmp>
+    <hr>
+    <div id="app">
+        <!-- 데이터에 등록될만한 변수들 val i arr  val i 는 for안에서 슬꺼라서 굳이 변수등록안해도됨
+        그래서 in다음에오는 아이만 데이터 등록하면됨 -->
+        <span v-for="(val, i) in arr" v-bind:key="i"> {{val}} </span>
+        <br>
+        <!-- 이벤트핸들러는 매서드에 -->
+        <button v-on:click="change1">방법1로 변경</button>
+        <button v-on:click="change2">방법2로 변경</button>
+        <button v-on:click="change3">방법3로 변경</button>
+        <button v-on:click="change4">방법4로 변경</button>
+    </div>
+</body>
+
+</html>
+
+<!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+
+    new Vue({
+        el: "#app",
+        data: {
+            arr: [1, 2, 3, 4, 5]
+        },
+        methods: {
+            change1: function (event) {
+                //클릭할때마다 나옴
+                console.log(event.target);
+                //this.$data.arr[0] = 100;
+                this.$set(this.$data.arr, 0, 100);
+                console.log(this.$data.arr);
+            },
+            change2: function (event) {
+                //클릭할때마다 나옴
+                console.log(event.target);
+                this.$set(this.$data.arr, 1, 300);
+                console.log(this.$data.arr);
+
+            },
+            //splice는 자동으로 되기에 재할당특징이있음
+            change3: function (event) {
+                //클릭할때마다 나옴
+                console.log(event.target);
+                this.$data.arr.splice(0, 2);
+                console.log(this.$data.arr);
+            },
+            //리엑트할떄 사용하긴함
+            change4: function (event) {
+                //클릭할때마다 나옴
+                console.log(event.target);
+                //3,4,5넣을수있는데 그냥 점 3개
+                var arr_copy = [500, ...this.$data.arr, 70]; //...this.$data.arr = 3,4,5 스프레드연산자 방에있는걸 하나씩 꺼내라는 의미임 점 3개가
+                console.log(arr_copy);
+                //this.$data.arr = arr_copy; 이행위를 하려고함
+                this.$set(this.$data, "arr", arr_copy); //프로퍼티는 문자열 큰따운표,작은따옴표로 넣기 > 객체에 프로퍼티를 넣을땐 문자열처리한다 > 숫자도 문자열도 넣어도된다 즉 두번재인자열은 문자열로 처리한다!! 배열 객체 상관하지말고
+            },
+        },
+        conponent: {
+
+        },
+        computed: {
+
+        }
+    })
+</script>
