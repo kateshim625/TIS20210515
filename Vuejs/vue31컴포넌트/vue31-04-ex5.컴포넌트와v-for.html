@@ -44,8 +44,10 @@
             <button v-on:click="clickAddBox">박스 추가</button>
         </p>
         <p>
+            <!-- val의 값을 넣어서 i의 키를 가지고 아래 넘버에 넘겨주고 자식인 컴포넌트-박스로 전달된다 -->
+            <!-- 그래서 val 지정해줄필요없고 arr만해주면됨 -->
             <b v-for="(val, i) in arr" v-bind:key="i">
-                {{val}}
+                <!-- {{val}} -->
                 <component-box v-bind:num="val"></component-box>
             </b>
         </p>
@@ -57,3 +59,44 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    var componentBox = {
+        /* pdtmc^2w */
+        props: [
+            "num",
+        ] ,
+        data: function() {
+            return {
+
+            }
+        },
+        template: `
+        <span style="display:inline-block; font-size:3em; border:1px dashed blue; padding:10px 20px; margin:5px; text-align:center;">
+            {{num}}
+        </span>`,
+    };
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        arr: [0, 1, 2, 3, 4, 5],
+    },
+    //template: ``,
+    methods: {
+        clickAddBox: function (event) {
+            this.$data.arr.push(this.$data.arr.length);
+            //this.$data.arr[this.$data.arr.length] = this.$data.arr.length;
+            //this.$set(this.$data, arr[this.$data.arr.length], this.$data.arr.length); //셋으로만들어보기
+        }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        "component-box": componentBox,
+    },
+});
+
+</script>

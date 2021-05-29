@@ -48,6 +48,7 @@
 
     <div id="app">
         <h2>컴포넌트 등록</h2>
+        <!-- //=을 기준으로 위에는 부모 인스턴스 또 =기준으로 왼쪽은 자신이고 오른쪽은 부모임 -->
 
         <global-component v-bind:propsdata="globalmsg1"></global-component>
         <global-component v-bind:propsdata="globalmsg2"></global-component>
@@ -61,3 +62,76 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    //전역컴포넌트 만들기 vuegc누르면 저절로 적힘
+    Vue.component("global-component", {
+        /* pdtmc^2w */
+        props: [
+            "propsdata",
+        ] ,
+
+        //여기템플릿을 통해서  프롭스의 값에 아래값이 들어가게됨
+        template: `
+        <div>
+            전역 컴포넌트
+            <button v-on:click="gclick">{{propsdata}}</button>
+        </div>
+        `,
+        methods: {
+            gclick: function (event) {
+                console.log(event.target);
+                alert(event.target.innerHTML);
+            }
+        },
+    });
+
+    //지역컴포넌트 만들기
+    //컴포넌트만드는 방법 자식넘기는방법
+    //local-component는 인스턴스에서 알수없어서 연결해야됨
+    var localComponent = {
+        props: [
+            //변수로 값을 받을것이다
+            "localmsg",
+        ] ,
+        data: function () {
+            return {
+                //지역은 리턴해줘야됨
+            }
+        },
+        //localmsg는 프롭아니면 데이터에 는 꼭 들어가야됨
+        template: `
+        <div>
+            지역 컴포넌트가 등록되었습니다!
+            <span style="border: 1px dashed blue; background-color:lightgray; padding: 5px;"
+                    v-on:click="lclick">
+                {{localmsg}}
+            </span>
+        </div>`,
+        methods: {
+            lclick: function (event) {
+                console.log(event.target);
+                alert(event.target.innerHTML);
+            }
+        },
+    };
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        //=을 기준으로 위에는 부모 인스턴스 또 =기준으로 왼쪽은 자신이고 오른쪽은 부모임
+        globalmsg1: "인스턴스에서 전역 컴포넌트로 넘겨진 메세지 1",
+        globalmsg2: "인스턴스에서 전역 컴포넌트로 넘겨진 메세지 2",
+        localmsg1: "인스턴스에서 지역 컴포넌트로 넘겨진 메세지 1",
+        localmsg2: "인스턴스에서 지역 컴포넌트로 넘겨진 메세지 2",
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        //지역컴포넌트를 등록하는것임 지역컴포넌트만
+        "local-component": localComponent,
+    },
+});
+
+</script>
