@@ -126,7 +126,7 @@
             "    ",
             "</template>",
             "",
-            "<s cript>",
+            "<script>",
             "    export default { ",
             "        /* pdtmc^2w */",
             "        props: [] ,",
@@ -158,7 +158,7 @@
             "            console.log(\"updated\");",
             "        },",
             "    }",
-            "</s cript>"
+            "</script>"
         ],
         "description": "Vue Single File Component"
     },
