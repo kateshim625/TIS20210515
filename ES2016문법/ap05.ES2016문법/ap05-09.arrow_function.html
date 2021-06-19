@@ -44,3 +44,19 @@
 </body>
 
 </html>
+<script type="text/babel">
+    var func1 = function (a, b) {
+        return a+b;
+    }
+    console.log(func1(3,4)); //7;
+    const func2 = (a,b) => {
+        return a+b;
+
+    }
+    console.log(func2(3,4)); //7;
+
+    const func3 = (a,b) => a + b;
+    console.log(func3(a+b));
+    //에러함수는 함수를 실행하는애가 주인이다 펑션이기에 매서드가아니니깐 전체 인스턴스 페이지 실행되는 자바스크립트 객체는 웹페이지
+    //윈도우객체가됨 
+</script>

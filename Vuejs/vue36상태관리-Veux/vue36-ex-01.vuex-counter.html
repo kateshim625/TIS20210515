@@ -90,11 +90,48 @@
         // 인자가 아래로 쭉 이어진다
         actions: { //메서드기준으로만들기
             addCounter: function (mutations, param) {
+                // import axios from "axios"; //<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script> 둘중한개만하면됨
 
+                //url method params만 바꾸면됨 호출시 url  params만 호출하면됨
+                axios({
+                    url: "http://localhost:5050/counter",  // 호출되는 서버 주소 뒤에 ?step=10넣어줘도됨 그런데 위에 param을 넣어주고싶기때문에 인자넣기위해서 빼주는게 좋음 ?step=10넣으면 고정이되니깐.
+                    method: "get",       // request method: get, post, delete, put
+                    params: { step:param},  // 서버로 보내는 데이터. 예시) { data1:"test1", data2:"test2" }
+                    timeout: 30000,    // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.
+                    responseType: "json",  // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script
+                })
+                .then( (res) => {
+                    console.log(res.data);
+                    // this.message1 = res.data;
+                    //mutations.comit("addCounter", param);
+                    mutations.comit("addCounter", res.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
                 //debugger
                 mutations.commit("addCounter", param);
             },
             subCounter: function (mutations, param) {
+                // import axios from "axios";
+
+                axios({
+                    url: "http://localhost:5050/counter",  // 호출되는 서버 주소.
+                    method: "get",       // request method: get, post, delete, put
+                    params: {step:param },  // 서버로 보내는 데이터. 예시) { data1:"test1", data2:"test2" }
+                    timeout: 30000,    // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.
+                    responseType: "json",  // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script
+                })
+                .then( (res) => {
+                    console.log(res.data);
+                    //this.message1 = res.data;
+                    //mutations.comit("subCounter", param);
+                    mutations.comit("subCounter", res.data);
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
                 mutations.commit("subCounter", param);
             },
         },
