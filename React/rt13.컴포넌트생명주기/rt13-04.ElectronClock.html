@@ -51,3 +51,80 @@
 
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from "react" */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from "react-dom" */
+</script>
+<script type="text/babel">
+//import React, {Component, PureComponent, Fragment} from "react";
+//import Redux from "redux";
+//import ReactRedux, {Provider} from "react-redux";
+//import {BrowserRouter,Switch,Router,Route,IndexRoute,Link,IndexLink,NavLink} from "react-router-dom";
+//import ReactDOM from "react-dom";
+
+console.log(React);
+
+class ElectronClock extends React.Component {
+
+    static defaultProps = {  /*  props의 디폴트 값 설정 */  }
+    static propsTypes = {  /* props의 프로퍼티 타입 설정 */ }
+    style = {
+        style1: {
+            fontSize: "80pt"
+        }
+    }
+    state = {
+        // 상태값(변수)을 정의한다.
+        hms: null,
+        handlerTimer: null,
+        //또는
+        //const d = new Date();
+        //const h = d.getHours();
+        //const m = d.getMinutes();
+        //const s = d.getSeconds();
+
+    }
+    componentDidMount() {
+        // 마운트 완료 후에 실행됨 : 페이지 load 될 때 한번
+        // componentDidMount가 사용되는 경우: redux 구독 설정, focus 줄때
+            this.state.handlerTimer = setInterval(() => {
+                this.setState({
+                    ...this.state,
+                    hms: new Date().toLocaleTimeString(),
+                })
+            }, 1000);
+    }
+    componentDidUpdate(prevProps, prevState) {
+        // 업데이트 완료 후에 실행됨 : 여러번, state 가 변경될 때마다
+    }
+    componentWillUnmount() {
+        // 언마운트 완료 후에 실행됨 : 페이지 unload 될 때 한번
+        // componentWillUnmount가 사용되는 경우: redux 구독 해제, 이벤트 핸들러 해제
+        clearInterval(this.state.handlerTimer);
+    }
+    handler = (event)=>{
+        // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+        console.log(event.target)
+    }
+    render() { // JSX로 화면 만들기
+        return (
+                <div style={this.style.style1}>
+                    {this.state.hms}
+
+                </div>
+            )
+    }
+};
+ReactDOM.render(
+    <ElectronClock></ElectronClock>
+    ,
+    document.getElementById("app")
+)
+
+//export default rt13-04.ElectronClock;
+</script>

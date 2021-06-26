@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+            content="ie=edge">
+        <title>Document</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- CSS import -->
+        <link rel="stylesheet"
+            href="../css/reset.css">
+        <style>
+            .strong {
+                color: red;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            label {
+                display: inline-block;
+                width: 80px;
+            }
 
-    <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
-    <style>
-        .strong {color:red; font-weight:bold; font-size:1.2em;}
-        label { display: inline-block; width: 80px;}
-        #app > div { margin: 5px 0 ;}
-    </style>
-</head>
-<body>
-    <xmp>
+            #app>div {
+                margin: 5px 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <xmp>
         리액트에서 CRUD2S 방법을 학습한다.
 
         CRUD2S 학습을 위해서 아래 사항에 대해서 미리 학습한다.
@@ -175,80 +189,383 @@
             5-4. power가 300이상인 사람은 글자색을 red로 bold스타일로 출력하세요.
 
     </xmp>
-    <hr>
-    <div id="app">
-        <h1>Creat Read Update Delete</h1>
-        <div>
+        <hr>
+        <div id="app">
+            <h1>Creat Read Update Delete</h1>
             <div>
-                <label for="">Name : </label>
-                <input type="text" name="name" />
+                <div>
+                    <label for="">Name : </label>
+                    <input type="text"
+                        name="name" />
+                </div>
+                <div>
+                    <label for="">Power : </label>
+                    <input type="text"
+                        name="power" />
+                </div>
+                <button>Add</button>
             </div>
-            <div>
-                <label for="">Power : </label>
-                <input type="text" name="power" />
-            </div>
-            <button>Add</button>
+            <hr />
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>POWER</th>
+                        <th>CRUD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td>1</td>
+                        <td>슈퍼맨</td>
+                        <td>100</td>
+                        <td>
+                            <button>Del</button>
+                            <button>Power Up</button>
+                            <button>Power Down</button>
+                            <button>Edit</button>
+                        </td>
+                    </tr>
+                    <tr class="strong">
+                        <td>2</td>
+                        <td>아쿠아맨</td>
+                        <td>300</td>
+                        <td>
+                            <button>Del</button>
+                            <button>Power Up</button>
+                            <button>Power Down</button>
+                            <button>Edit</button>
+                        </td>
+                    </tr>
+                    <tr class="strong">
+                        <td>3</td>
+                        <td>스파이더맨</td>
+                        <td>500</td>
+                        <td>
+                            <button>Del</button>
+                            <button>Power Up</button>
+                            <button>Power Down</button>
+                            <button>Edit</button>
+                        </td>
+                    </tr>
+                    <tr class="strong">
+                        <td>4</td>
+                        <td>배트맨</td>
+                        <td>30</td>
+                        <td>
+                            <button>Del</button>
+                            <button>Power Up</button>
+                            <button>Power Down</button>
+                            <button>Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <hr/>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>POWER</th>
-                    <th>CRUD</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td>1</td>
-                    <td>슈퍼맨</td>
-                    <td>100</td>
-                    <td>
-                        <button>Del</button>
-                        <button>Power Up</button>
-                        <button>Power Down</button>
-                        <button>Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>2</td>
-                    <td>아쿠아맨</td>
-                    <td>300</td>
-                    <td>
-                        <button>Del</button>
-                        <button>Power Up</button>
-                        <button>Power Down</button>
-                        <button>Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>3</td>
-                    <td>스파이더맨</td>
-                    <td>500</td>
-                    <td>
-                        <button>Del</button>
-                        <button>Power Up</button>
-                        <button>Power Down</button>
-                        <button>Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>4</td>
-                    <td>배트맨</td>
-                    <td>30</td>
-                    <td>
-                        <button>Del</button>
-                        <button>Power Up</button>
-                        <button>Power Down</button>
-                        <button>Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-</body>
+    </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from "react" */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from "react-dom" */
+</script>
+<script type="text/babel">
+    console.log(React);
+    class CrudInput extends React.Component {
+        constructor(props) {
+            super()
+            this.refUserName = React.createRef()
+            this.refUserPower = React.createRef()
 
+        }
+        doIns = (event) => {
+            // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+            console.log(event.target)
 
+            // 유효성 검사: 생략
+            if (this.refUserName.current.value.trim() === '') {
+                alert('이름을 입력하세요')
+                this.refUserName.current.focus()
+                event.preventDefault()
+                return false
+            }
+            if (this.refUserName.current.value.trim() === '') {
+                alert('파워를 입력하세요')
+                this.refUserPower.current.focus()
+                event.preventDefault()
+                return false
+            }
+            if (isNaN(Number(this.refUserPower.current.value))) {
+                alert('파워에 숫자를 입력하세요')
+                this.refUserPower.current.value = ""
+                this.refUserPower.current.focus()
+                event.preventDefault()
+                return false
+            }
+
+            // ref 를 사용하여 현재 입력된 값을 가져온다.
+            //const name = this.refUserName.current.value
+            //const power = Number(this.refUserPower.current.value)
+            const newitem = {
+                id: null,
+                name: this.refUserName.current.value,
+                power: Number(this.refUserPower.current.value),
+            }
+            //부모의 입력값을 전달 > 부모 컴포넌트 콜백 메서드 호출
+            this.props.doIns(newitem);
+
+            //입력값 초기화
+            this.refUserName.current.value = "";
+            this.refUserPower.current.value = 0;
+        }
+        render() { // JSX로 화면 만들기
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="">Name : </label>
+                        <input type="text" name="name" placeholder="이름을 입력하세요" ref={this.refUserName} defaultValue={""} />
+                    </div>
+                    <div>
+                        <label htmlFor="">Power : </label>
+                        <input type="text" name="power" placeholder="파워를 입력하세요" ref={this.refUserPower} defaultValue={0} />
+                    </div>
+                    <button onClick={this.doIns}>Add</button>
+                </div>
+            )
+        }
+    };
+    console.log(React);
+    class CrudList extends React.Component {
+        render() { // JSX로 화면 만들기
+            const { items } = this.props;
+            //debugger
+            const arrs = items.map((item, index, array) => {
+                //필드값이아니라 맴안에서사용하는 매게변수이기때문에 this안써도된다
+                return (
+                    <CrudListItem key={index}
+                        item={item}
+                        index={index}
+                        {...this.props} />
+                )
+            });
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {arrs}
+                    </tbody>
+                </table>
+            )
+        }
+    };
+    console.log(React);
+    class CrudApp extends React.Component {
+        state = {
+            items: [
+                { id: 1, name: "슈퍼맨", power: 100 },
+                { id: 2, name: "아쿠아맨", power: 300 },
+                { id: 3, name: "스파이더맨", power: 500 },
+                { id: 4, name: "배트맨", power: 30 },
+            ]
+        }
+        func = {
+            doIns(newitem) {
+                //debugger;
+                if (this.state.items.length > 0) {
+                    //add
+                    const maxitem = this.state.items.reduce((prev, curt) => {
+                        //debugger
+                        if (prev.id > curt.id)
+                            return prev.id;
+                        else
+                            return curt;
+                    });
+                    newitem.id = maxitem.id + 1;
+                }
+                else {
+                    //create array
+                    newitem.id = 1;
+                }
+                const newitems = [...this.state.items, newitem];
+                this.setState({
+                    ...this.state,
+                    items: newitems,
+                })
+            },
+            doDel(index, item) {
+                // ...생략
+                const r = window.confirm("정말로 삭제하시겠습니까?")
+                if (!r) return;
+
+                const newitems = this.state.items.filter((element, index) => {
+                    return element.id !== item.id;
+                });
+                this.setState({
+                    ...this.state,
+                    items: newitems,
+                })
+            },
+            doUp(index, item) {
+                const newitems = this.state.items.map((element, index) => {
+                    if (element.id === item.id) {
+                        element.power = element.power + 100;
+                    }
+                    return element;
+                });
+                this.setState({
+                    ...this.state,
+                    items: newitems,
+                })
+            },
+            doDown(index, item) {
+                const newitems = this.state.items.map((element, index) => {
+                    if (element.id === item.id) {
+                        element.power = element.power - 50;
+                    }
+                    return element;
+                });
+                this.setState({
+                    ...this.state,
+                    items: newitems,
+                })
+            },
+            doSave(newitem) {
+                //debugger
+                const newitems = this.state.items.map((element, index) => {
+                    if (element.id === newitem.id) {
+                        return newitem;
+                    } else {
+                        return element;
+                    }
+                });
+                this.setState({
+                    ...this.state,
+                    items: newitems,
+                })
+            },
+        }
+        constructor(props) {
+            super()
+            this.func.doIns = this.func.doIns.bind(this)
+            this.func.doDel = this.func.doDel.bind(this)
+            this.func.doUp = this.func.doUp.bind(this)
+            this.func.doDown = this.func.doDown.bind(this)
+            this.func.doSave = this.func.doSave.bind(this)
+        }
+        render() { // JSX로 화면 만들기
+            return (
+                <div id="app">
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput {...this.props} {...this.state} {...this.func} {...this.sytle} />
+                    <hr />
+                    <CrudList {...this.props} {...this.state} {...this.func} {...this.sytle} />
+                </div>
+            )
+        }
+    };
+    console.log(React);
+    class CrudListItem extends React.Component {
+        state = {
+            isEditMode: false
+        }
+        constructor(props) {
+            super()
+            this.refUserName = React.createRef()
+            this.refUserPower = React.createRef()
+        }
+        doDel = (event) => {
+            //debugger
+            const { index, item } = this.props;
+            this.props.doDel(index, item);
+        }
+        doUp = (event) => {
+            //debugger
+            const { index, item } = this.props;
+            this.props.doUp(index, item);
+        }
+        doDown = (event) => {
+            //debugger
+            const { index, item } = this.props;
+            this.props.doDown(index, item);
+        }
+        doEdit = (event) => {
+            //debugger
+            //this.state.isEditMode = true;
+            this.setState({
+                ...this.state,
+                isEditMode: true
+            })
+        }
+        doSave = (event) => {
+            //debugger
+            //this.state.isEditMode = true;
+            this.setState({
+                ...this.state,
+                isEditMode: false
+            })
+            const newitem = {
+                id: this.props.item.id,
+                name: this.refUserName.current.value,
+                power: Number(this.refUserPower.current.value),
+            }
+            this.props.doSave(newitem);
+        }
+        render() { // JSX로 화면 만들기
+            //const {item} = this.props.item;
+            const { item } = this.props;
+            const strong = item.power >= 300 ? "strong" : "";
+            const formEdit = (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>
+                        <input type="text" name="name" placeholder="이름을 입력하세요" ref={this.refUserName} defaultValue={item.name} />
+                    </td>
+                    <td><input type="text" name="power" placeholder="파워를 입력하세요" ref={this.refUserPower} defaultValue={item.power} />
+                    </td>
+                    <td>
+                        <button onClick={this.doDel}>Del</button>
+                        <button onClick={this.doUp}>Power Up</button>
+                        <button onClick={this.doDown}>Power Down</button>
+                        <button onClick={this.doSave}>Save</button>
+                    </td>
+                </tr>
+            )
+            const formView = (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.power}</td>
+                    <td>
+                        <button onClick={this.doDel}>Del</button>
+                        <button onClick={this.doUp}>Power Up</button>
+                        <button onClick={this.doDown}>Power Down</button>
+                        <button onClick={this.doEdit}>Edit</button>
+                    </td>
+                </tr>
+            )
+            if (this.state.isEditMode)
+                return formEdit
+            else
+                return formView
+        }
+    };
+
+    ReactDOM.render(
+        <CrudApp></CrudApp>
+        ,
+        document.getElementById("app")
+    )
+</script>
